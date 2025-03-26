@@ -1,0 +1,41 @@
+CREATE DATABASE inventory_db;
+USE inventory_db;
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    category VARCHAR(255),
+    price DECIMAL(10,2) NOT NULL,
+    stock INT NOT NULL DEFAULT 0
+);
+CREATE TABLE sales (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    sale_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+CREATE TABLE purchases (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+CREATE TABLE suppliers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    contact VARCHAR(20),
+    email VARCHAR(255)
+);
+select * from products;
+INSERT INTO products (name, category, price, stock) VALUES
+('Laptop', 'Electronics', 75000, 10),
+('Smartphone', 'Electronics', 35000, 20),
+('Headphones', 'Accessories', 2500, 50),
+('Smartwatch', 'Wearables', 15000, 15),
+('Wireless Mouse', 'Accessories', 1200, 30),
+('Keyboard', 'Accessories', 1800, 25),
+('Monitor', 'Electronics', 12000, 12),
+('External Hard Drive', 'Storage', 5000, 8),
+('Power Bank', 'Accessories', 2000, 40),
+('Bluetooth Speaker', 'Audio', 3000, 18);
